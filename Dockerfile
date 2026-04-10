@@ -14,7 +14,8 @@ RUN apk add --no-cache \
     libpng-dev \
     libzip-dev \
     oniguruma-dev \
-    libxml2-dev
+    libxml2-dev \
+    icu-dev
 
 # Install ekstensi PHP
 RUN docker-php-ext-install \
@@ -25,7 +26,11 @@ RUN docker-php-ext-install \
     bcmath \
     gd \
     opcache \
-    zip
+    zip \
+    intl
+
+
+RUN git config --global --add safe.directory /var/www/html
 
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer

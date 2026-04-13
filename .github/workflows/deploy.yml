@@ -118,7 +118,7 @@ jobs:
             docker-compose up -d --remove-orphans
 
             # Tunggu container siap
-            echo "⏳ Menunggu container ready..."
+            echo "⏳ Menunggu container ready.."
             sleep 50
 
             # Jalankan migrasi database

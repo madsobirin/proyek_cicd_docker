@@ -102,33 +102,27 @@ jobs:
           port: 8022
           script: |
             set -e
-            echo "🚀 Memulai proses deployment..."
-
-            # 1. Masuk ke folder project
             cd /home/${{ secrets.SERVER_USER }}/RPL2D-kelompok-5
 
-            # 2. Login ke GHCR (Gudang Image)
-            echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
-
-            # 3. Pull image terbaru (Paksa lowercase)
+            # 1. Pull image
             IMAGE_REPO=$(echo "ghcr.io/${{ github.repository }}" | tr '[:upper:]' '[:lower:]')
-            echo "📥 Menarik image terbaru: $IMAGE_REPO"
             docker pull $IMAGE_REPO:latest
 
-            # 4. Hapus kontainer lama (Solusi ampuh buat KeyError: 'ContainerConfig')
+            # 2. Hapus kontainer lama (Gunakan Docker V2 untuk hapus juga)
             echo "🗑️ Membersihkan kontainer lama..."
+            docker compose down || true
+            # Tambahan: hapus paksa jika ada nama yang nyangkut
             docker rm -f proyek2_ahmadsobirin || true
 
-            # 5. Jalankan kontainer baru
-            echo "⚙️ Menjalankan docker-compose..."
+            # 3. Jalankan dengan Docker Compose V2 (Tanpa Strip)
+            echo "🚀 Menjalankan dengan Docker Compose V2..."
             docker compose up -d --remove-orphans
 
-            # 6. Tunggu sebentar biar DB siap
-            echo "⏳ Menunggu container stabil..."
+            echo "⏳ Menunggu container..."
             sleep 10
 
-            # 7. Jalankan migrasi database (Tanpa flag -T biar gak error)
-            echo "📂 Menjalankan migrasi database..."
-            docker exec -i proyek2_ahmadsobirin php artisan migrate --force --no-interaction
+            # 4. Migrasi (Gunakan Docker Compose V2)
+            echo "📂 Migrasi database..."
+            docker compose exec -T app php artisan migrate --force --no-interaction
 
-            echo "✅ Deployment selesai! Silakan cek di port 8081."
+            echo "✅ SELESAI! Cek port 8081."

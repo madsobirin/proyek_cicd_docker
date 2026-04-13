@@ -102,31 +102,33 @@ jobs:
           port: 8022
           script: |
             set -e
+            echo "🚀 Memulai proses deployment..."
 
-            echo "🚀 Mulai deployment..."
-
-            # Login ke GHCR
-            echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
-
-            # Masuk ke folder project
+            # 1. Masuk ke folder project
             cd /home/${{ secrets.SERVER_USER }}/RPL2D-kelompok-5
 
-            # Pull image terbaru
-            docker pull ghcr.io/madsobirin/proyek_cicd_docker:latest
+            # 2. Login ke GHCR (Gudang Image)
+            echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
-            echo "🗑️ Menghapus kontainer lama untuk menghindari bug ContainerConfig..."
-            # Kita hapus dulu kontainernya secara paksa
+            # 3. Pull image terbaru (Paksa lowercase)
+            IMAGE_REPO=$(echo "ghcr.io/${{ github.repository }}" | tr '[:upper:]' '[:lower:]')
+            echo "📥 Menarik image terbaru: $IMAGE_REPO"
+            docker pull $IMAGE_REPO:latest
+
+            # 4. Hapus kontainer lama (Solusi ampuh buat KeyError: 'ContainerConfig')
+            echo "🗑️ Membersihkan kontainer lama..."
             docker rm -f proyek2_ahmadsobirin || true
 
-            echo "🚀 Menjalankan kontainer baru..."
-            # Karena sudah dihapus, dia tidak akan error 'ContainerConfig'
+            # 5. Jalankan kontainer baru
+            echo "⚙️ Menjalankan docker-compose..."
             docker-compose up -d --remove-orphans
 
-            # Tunggu container siap
-            echo "⏳ Menunggu container ready.."
-            sleep 50
+            # 6. Tunggu sebentar biar DB siap
+            echo "⏳ Menunggu container stabil..."
+            sleep 10
 
-            # Jalankan migrasi database
-            docker compose exec app php artisan migrate --force --no-interaction
+            # 7. Jalankan migrasi database (Tanpa flag -T biar gak error)
+            echo "📂 Menjalankan migrasi database..."
+            docker exec -i proyek2_ahmadsobirin php artisan migrate --force --no-interaction
 
-            echo "✅ Deployment selesai!"
+            echo "✅ Deployment selesai! Silakan cek di port 8081."

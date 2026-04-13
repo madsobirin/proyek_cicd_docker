@@ -112,7 +112,7 @@ jobs:
             cd /home/${{ secrets.SERVER_USER }}/RPL2D-kelompok-5
 
             # Pull image terbaru
-            docker pull ghcr.io/${{ github.repository }}:latest
+            docker pull ghcr.io/madsobirin/proyek_cicd_docker:latest
 
             # Update container tanpa downtime besar
             docker compose up -d --remove-orphans

@@ -20,7 +20,7 @@
         <div class="space-x-3">
             @auth
                 <span class="font-semibold text-green-600">
-                    Selamat datang, {{ Auth::user()->nama_lengkap ?? Auth::user()->username }}
+                    Selamat datangg, {{ Auth::user()->nama_lengkap ?? Auth::user()->username }}
                 </span>
 
                 <a href={{ route('test.profile') }}

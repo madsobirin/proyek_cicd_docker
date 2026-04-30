@@ -35,7 +35,7 @@
         <div class="hidden md:block">
             <span class="text-sm text-text-muted font-medium mr-2">Already a member?</span>
             <a class="text-sm font-bold text-primary hover:underline transition-all"
-                href="{{ route('auth.login') }}">Sign In</a>
+                href="{{ route('login') }}">Sign In</a>
         </div>
     </header>
 

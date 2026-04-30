@@ -55,7 +55,7 @@ class ProfileTest extends TestCase
         $response = $this->actingAs($account)->patch('/test/profile/update', [
             'name'  => 'Test User',
             'email' => $account->email,
-            'photo' => UploadedFile::fake()->image('avatar.jpg', 200, 200),
+            'photo' => UploadedFile::fake()->create('avatar.jpg', 100, 'image/jpeg'),
         ]);
 
         $response->assertRedirect();

@@ -24,7 +24,7 @@ Route::get('/auth', function () {
 Route::get('/auth/google/redirect', [GoogleController::class, 'redirectToGoogle'])->name('auth.google.redirect');
 Route::get('/auth/google/callback',  [GoogleController::class, 'handleGoogleCallback'])->name('auth.google.callback');
 
-Route::get('/login', [AuthCustomController::class, 'index'])->name('auth.login');
+Route::get('/login', [AuthCustomController::class, 'index'])->name('login');
 Route::post('/login', [AuthCustomController::class, 'login'])->name('auth.login.post');
 
 Route::get('/register', [AuthCustomController::class, 'showRegister'])->name('auth.register');

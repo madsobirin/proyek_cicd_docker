@@ -31,7 +31,7 @@
         <!-- Login Form -->
         <template x-if="tab === 'login'">
             <div x-transition>
-                <form action="{{ route('auth.login') }}" method="POST">
+                <form action="{{ route('login') }}" method="POST">
                     @csrf
                     <label>Username</label>
                     <input type="text" name="username" class="w-full border rounded-lg p-2 mb-3"

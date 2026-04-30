@@ -94,7 +94,7 @@ else document.documentElement.classList.remove('dark');"
                     </a>
                 @else
                     {{-- ✅ Login --}}
-                    <a href="{{ route('auth.login') }}"
+                    <a href="{{ route('login') }}"
                         class="bg-primary hover:bg-primary-hover
                    text-background-dark px-6 py-2.5
                    rounded-full font-semibold
@@ -134,7 +134,7 @@ else document.documentElement.classList.remove('dark');"
             @endauth
 
             @guest
-                <a href="{{ route('auth.login') }}"
+                <a href="{{ route('login') }}"
                     class="mt-4 bg-primary text-background-dark px-4 py-2 rounded-lg font-semibold text-center">
                     Login
                 </a>

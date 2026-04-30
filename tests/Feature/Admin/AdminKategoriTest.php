@@ -79,6 +79,6 @@ class AdminKategoriTest extends TestCase
     public function test_guest_cannot_access_admin_kategori(): void
     {
         $response = $this->get('/admin/kategori');
-        $response->assertRedirect(route('auth.login'));
+        $response->assertRedirect(route('login'));
     }
 }

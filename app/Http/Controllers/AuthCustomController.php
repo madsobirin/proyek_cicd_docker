@@ -33,7 +33,7 @@ class AuthCustomController extends Controller
             'role' => 'user',
         ]);
 
-        return to_route('auth.login')
+        return to_route('login')
             ->with('success', 'Akun berhasil dibuat, silakan login.');
     }
 
@@ -63,7 +63,7 @@ class AuthCustomController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect()->route('auth.login')
+        return redirect()->route('login')
             ->with('success', 'Anda telah logout.');
     }
 }

@@ -66,6 +66,6 @@ class ToggleStatusTest extends TestCase
         $user = Account::factory()->create();
 
         $response = $this->post('/admin/users/' . $user->id . '/toggle-status');
-        $response->assertRedirect(route('auth.login'));
+        $response->assertRedirect(route('login'));
     }
 }

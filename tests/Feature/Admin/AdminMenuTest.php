@@ -84,7 +84,7 @@ class AdminMenuTest extends TestCase
     public function test_guest_cannot_access_admin_menu(): void
     {
         $response = $this->get('/admin/menu');
-        $response->assertRedirect(route('auth.login'));
+        $response->assertRedirect(route('login'));
     }
 
     public function test_non_admin_cannot_access_admin_menu(): void

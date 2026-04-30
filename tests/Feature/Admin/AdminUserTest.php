@@ -103,7 +103,7 @@ class AdminUserTest extends TestCase
     public function test_guest_cannot_access_admin_users(): void
     {
         $response = $this->get('/admin/users');
-        $response->assertRedirect(route('auth.login'));
+        $response->assertRedirect(route('login'));
     }
 
     public function test_non_admin_cannot_access_admin_users(): void

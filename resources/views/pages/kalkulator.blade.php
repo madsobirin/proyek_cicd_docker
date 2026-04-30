@@ -16,7 +16,7 @@
                     <p class="text-text-muted mb-6 text-sm">Silakan login atau daftar akun FitLife terlebih dahulu untuk
                         menggunakan fitur Kalkulator BMI kami.</p>
                     <div class="flex flex-col gap-3">
-                        <a href="{{ route('auth.login') }}"
+                        <a href="{{ route('login') }}"
                             class="w-full py-3 bg-primary text-background-base font-bold rounded-xl shadow-glow hover:bg-primary-hover transition-all">Masuk
                             / Daftar Sekarang</a>
                         <a href="{{ route('home') }}"

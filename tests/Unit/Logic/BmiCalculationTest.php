@@ -66,8 +66,8 @@ class BmiCalculationTest extends TestCase
 
     public function test_bmi_boundary_25(): void
     {
-        // Tinggi 170, Berat ~72.2 → BMI ≈ 24.98
-        $result = $this->calculateBmi(170, 72.2);
+        // Tinggi 170, Berat 71.9 → BMI raw = 71.9 / 2.89 ≈ 24.88 → Normal (≤ 24.9)
+        $result = $this->calculateBmi(170, 71.9);
         $this->assertEquals('Normal', $result['label']);
     }
 

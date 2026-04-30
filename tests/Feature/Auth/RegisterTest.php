@@ -25,7 +25,7 @@ class RegisterTest extends TestCase
             'password' => 'password123',
         ]);
 
-        $response->assertRedirect(route('auth.login'));
+        $response->assertRedirect(route('login'));
         $response->assertSessionHas('success');
 
         $this->assertDatabaseHas('accounts', [

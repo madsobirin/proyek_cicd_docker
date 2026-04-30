@@ -39,7 +39,7 @@ class DashboardTest extends TestCase
     public function test_guest_cannot_access_admin_dashboard(): void
     {
         $response = $this->get('/admin');
-        $response->assertRedirect(route('auth.login'));
+        $response->assertRedirect(route('login'));
     }
 
     public function test_non_admin_user_cannot_access_admin_dashboard(): void

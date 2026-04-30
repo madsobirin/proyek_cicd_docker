@@ -1,5 +1,5 @@
 # Dockerfile
-FROM php:8.2-fpm-alpine
+FROM php:8.4-fpm-alpine
 
 # Install dependencies sistem
 RUN apk add --no-cache \
@@ -9,7 +9,7 @@ RUN apk add --no-cache \
     curl \
     zip \
     unzip \
-    git \
+    git \   
     supervisor \
     libpng-dev \
     libzip-dev \

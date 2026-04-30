@@ -50,7 +50,7 @@ Route::match(['get', 'post'], '/kalkulator', [HomeController::class, 'kalkulator
 
 
 
-Route::prefix('admin')->name('admin.')->group(function () {
+Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('dashboard');
 
     Route::resource('menu', AdminMenuController::class);
@@ -63,5 +63,5 @@ Route::prefix('admin')->name('admin.')->group(function () {
 Route::post(
     '/admin/users/{id}/toggle-status',
     [AdminController::class, 'toggleStatus']
-)->name('admin.users.toggleStatus');
+)->middleware(['auth', 'admin'])->name('admin.users.toggleStatus');
 
